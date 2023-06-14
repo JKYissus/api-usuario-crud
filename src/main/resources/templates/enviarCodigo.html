@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Correo de verificación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #333;
+            margin: 0;
+        }
+
+        .content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .verification-code {
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-radius: 3px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Validar correo</h1>
+    </div>
+    <div class="content">
+        <p>Hola,</p>
+        <p>Favor de verificar su correo electrinico.</p>
+        <p>El código de verificación es:</p>
+        <div class="verification-code">
+            <h2>{codigo}</h2>
+        </div>
+    </div>
+    <div class="footer">
+        <img src='https://imagenes.oferteando.com/2021/06/Coppel-xYlgsfp7c2hbXGI5.png' alt='footerImgen' style='display:block; margin: 20px auto;'>
+    </div>
+</div>
+</body>
