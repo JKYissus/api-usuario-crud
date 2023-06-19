@@ -233,6 +233,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void validarDatosUsuario(@NotNull UsuarioDTO user, String idUser) {
 
         String idUsuario = "";
+        String idEmail = "";
         List<String> mensajeDeError = new ArrayList<>();
         Pattern pattern = Pattern.compile(EMAIL_REGEX);
         Matcher matcher = pattern.matcher(user.getCorreo());
@@ -259,19 +260,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         ModeloUsuario email =  this.userRepository.findByCorreo(user.getCorreo());
 
-        if ( email != null ){
-            idUsuario = email.get_id();
+        if ( email != null && !idUser.equals(email.get_id()) ){
             mensajeDeError.add(Error.CORREO_EXISTENTE);
         }
 
         ModeloUsuario username =  this.userRepository.findByUsername(user.getUsername());
 
-        if ( username != null ){
-            idUsuario = username.get_id();
+        if ( username != null && !idUser.equals(username.get_id()) ){
+
             mensajeDeError.add(Error.USERNAME_EXISTENTE);
         }
 
-        if(mensajeDeError.size() > 0 && !idUsuario.equals(idUser)) {
+        if(mensajeDeError.size() > 0 ) {
             throw new RequestException(HttpStatus.UNPROCESSABLE_ENTITY,
                     new Meta(UUID.randomUUID().toString(),HttpStatus.UNPROCESSABLE_ENTITY.toString(),
                             422, mensajeDeError.toString()));
