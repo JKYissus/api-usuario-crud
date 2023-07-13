@@ -13,11 +13,11 @@ import { validarPassword } from 'src/app/validator/password-validator';
 })
 
 export class ChangePasswordComponent implements OnInit {
+
   correovalido: boolean = false;
   correoEnviado: boolean = false;
   passwordVisibleNew: boolean = false;
   passwordVisibleConfirm: boolean = false;
-
   cambiarPassword: boolean = false;
 
   formCorreo = new FormGroup({

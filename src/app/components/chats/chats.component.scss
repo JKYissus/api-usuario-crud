@@ -1,59 +1,44 @@
-.sidebar {
-    border-right: solid 1px #ddd;
-    background-color: #f8f9fa;
-    overflow-y: auto;
-    height: calc(100vh - 60px);
-    /* Adjust the height as needed */
+element.style {
+    background-color: #f0f2f5;
+
 }
 
-.user-item {
+.content {
+    background-color: #f0f2f5;
+    display: grid;
+    grid-template-columns: max-content 10fr;
+    gap: 30px;
+    min-height: 9%;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.usertitle {
+    margin: 0px;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.chat-item {
     width: 100%;
     display: flex;
     align-items: center;
     padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
     gap: 10px;
-    border-bottom: solid 1px #ddd;
 }
 
-.user-item.selected {
-    background-color: #e2f2ff;
-}
-
-.user-item:hover {
-    background-color: #f1f1f1;
-}
-
-.profile-image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 10px;
-}
-
-.profile-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.user-details {
-    flex-grow: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.username {
+.btn-send {
     margin: 0;
     font-size: 14px;
     font-weight: bold;
 }
 
 .scroll-wrapper {
-    border-right: solid 1px #ddd;
     overflow-y: auto;
     height: 100%;
     padding-right: 10px;
@@ -75,37 +60,10 @@
     background-color: transparent;
 }
 
-.header-chat {
-    border-right: solid 1px #ddd;
-    background-color: #f0f2f5;
-    display: grid;
-    grid-template-columns: max-content 10fr;
-    gap: 30px;
-    min-height: 9%;
-}
-
-.content-sidervar {
-    transform: translateX(-20px);
-}
-
-.sidevarOpen {
-    transform: translateX(-200px);
-    transition: transform 0.8s ease;
-
-}
-
-.sidervarClose {
-    transform: translateX(-120px);
-    transition: transform 0.8s ease;
-
-}
-
-.img-close {
-    transform: rotate(180deg);
-}
-
-.img-open {
-    transform: rotate(0deg);
+.messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
 }
 
 .send-button {
@@ -115,9 +73,4 @@
 
 .send-button:hover {
     transform: scale(1.1);
-}
-
-*,
-::after {
-    box-sizing: border-box;
 }

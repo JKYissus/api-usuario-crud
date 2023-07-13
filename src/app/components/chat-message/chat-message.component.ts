@@ -20,9 +20,7 @@ export class ChatMessageComponent implements OnInit {
 
         this.userto = data.id;
 
-
       }, error: (error) => {
-
       }
     })
   }

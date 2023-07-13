@@ -16,53 +16,30 @@ interface User {
   styleUrls: ['./chats.component.scss']
 })
 export class ChatsComponent implements OnInit {
+
   mostrarMenu: boolean = false;
-
-
-  constructor(
-    private route: ActivatedRoute,
-    private service: ApiService
-  ) { }
-
+  userto: string = "";
   selectedUser: any = null;
   userselect: string = "";
   users: User[] = [];
   filteredUsers: User[] = [];
-  ngOnInit(): void {
 
+  constructor(
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit(): void {
     this.route.firstChild?.params.subscribe({
       next: (data: any) => {
-        console.log(data);
-        this.userselect = data.id;
+        this.userto = data.id;
       }, error: (error) => {
-
       }
     })
-    this.getUserLoged()
   }
 
-  selectUser(user: any) {
-    this.selectedUser = user;
+  autoResizeTextArea(textarea: any) {
+    textarea.style.height = 'auto';
+    textarea.style.height = Math.min(textarea.scrollHeight, 65) + 'px';
   }
-
-  getUserLoged() {
-    this.service.getUsers(0, 100, this.userselect!).subscribe({
-      next: (data: any) => {
-        this.filteredUsers = [...
-          data.data.usuarios.map((user: User) => {
-            return {
-              username: user.username,
-              nombres: user.nombres,
-              apellidos: user.apellidos,
-              correo: user.correo,
-              id: user.id,
-            }
-          })
-        ];
-      }, error: (error) => {
-
-      }
-    });
-  }
-
 }
+

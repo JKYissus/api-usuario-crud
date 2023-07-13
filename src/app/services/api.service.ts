@@ -11,7 +11,6 @@ export class ApiService {
     constructor(private http: HttpClient) { }
 
     private getHeaders(): HttpHeaders {
-        // Aquí puedes agregar encabezados personalizados si es necesario
         const headers = new HttpHeaders({
             'Content-Type': 'application/json'
         });
@@ -71,8 +70,7 @@ export class ApiService {
         nombres: string,
         apellidos: string,
         id: string
-    }
-    ) {
+    }) {
 
         const tokenWithQuotes = sessionStorage.getItem('session');
 

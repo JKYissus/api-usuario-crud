@@ -17,12 +17,27 @@ interface Paginado {
   tamPagina: number;
 }
 
+interface UserSession {
+  id: string;
+  correo: string;
+  rol: string;
+  username: string;
+}
+
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.scss']
 })
 export class UsuarioComponent implements OnInit {
+
+  searchText: string = '';
+  filteredUsers: User[] = [];
+  currentPage: number = 0;
+  pageSize: number = 8;
+  actualUser: number = 0;
+  buscarValido: boolean = false;
+  totalPaginas: number = 0;
 
   users: User[] = [];
   paginado: Paginado = {
@@ -32,13 +47,6 @@ export class UsuarioComponent implements OnInit {
   };
 
   searchForm = new FormGroup({ usuario: new FormControl('', [Validators.required]) })
-
-  searchText: string = '';
-  filteredUsers: User[] = [];
-  currentPage: number = 0;
-  pageSize: number = 5;
-
-  totalPaginas: number = 0;
 
   constructor(
     private service: ApiService,
@@ -51,7 +59,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   get pages(): number[] {
-    return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+    return Array.from({ length: this.totalPages }, (_, index) => index + 2);
   }
 
   ngOnInit() {
@@ -74,14 +82,11 @@ export class UsuarioComponent implements OnInit {
   }
 
   nextPage() {
-
-    if (this.currentPage >= this.totalPages) {
-      return
+    if (this.currentPage === this.totalPages + 1) {
+      return;
     }
-
     this.currentPage++;
     this.getUsers();
-
   }
 
   get mostrarTotalPaginas(): number[] {
@@ -97,29 +102,34 @@ export class UsuarioComponent implements OnInit {
 
 
   getUsers() {
+
     this.service.getUsers(this.currentPage, this.pageSize, this.searchForm.value.usuario!).subscribe({
       next: (data: any) => {
 
-        this.totalPaginas = data.data.paginado.totalPaginas;
+        if (data.data.paginado.totalPaginas >= 1) {
 
-        if (data.data.paginado.totalPaginas < 1) {
+          this.totalPaginas = data.data.paginado.totalPaginas;
+
+          this.filteredUsers = data.data.usuarios.map((user: User) => {
+            return {
+              username: user.username,
+              nombres: user.nombres,
+              apellidos: user.apellidos,
+              correo: user.correo
+            };
+          });
+          let userid: UserSession = JSON.parse(sessionStorage.getItem('user')!.toString());
+          this.filteredUsers = this.filteredUsers.filter(function (el) { return el.username != userid.username; });
+
+        } else {
           this.Swal.showError("El usuario no se encontro").then((result) => {
             if (result.isConfirmed) {
               return;
             }
           });
         }
-
-
-        this.filteredUsers = data.data.usuarios.map((user: User) => {
-          return {
-            username: user.username,
-            nombres: user.nombres,
-            apellidos: user.apellidos,
-            correo: user.correo
-          };
-        });
-      },
+      }
+      ,
       error: (error: any) => {
         console.log(error.error);
       }

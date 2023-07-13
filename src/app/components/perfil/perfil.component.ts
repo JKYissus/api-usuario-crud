@@ -35,10 +35,10 @@ export class PerfilComponent implements OnInit {
   userid: UserSession = JSON.parse(sessionStorage.getItem('user')!.toString());
 
   formUser = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    correo: new FormControl('', [Validators.required]),
-    nombres: new FormControl('', [Validators.required]),
-    apellidos: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required, Validators.maxLength(100), Validators.pattern(/[a-zA-Z ]\d{0,9}/)]),
+    correo: new FormControl('', [Validators.required, Validators.email]),
+    nombres: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
+    apellidos: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
     id: new FormControl(this.userid.id, [Validators.required]),
   })
 
@@ -118,6 +118,7 @@ export class PerfilComponent implements OnInit {
       next: (data) => {
         this.habilidarBtnEditar = true;
       }, error: (error) => {
+
       }
     });
   }

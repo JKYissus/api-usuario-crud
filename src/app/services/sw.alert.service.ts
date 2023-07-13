@@ -6,7 +6,7 @@ import Swal, { SweetAlertIcon, SweetAlertResult } from "sweetalert2";
 })
 export class SwAlertService {
     showError(message: string) {
-        return this.showAlert("error", "Error", message);
+        return this.showAlert("warning", "", message);
     }
 
     showSuccess(message: string) {

@@ -55,20 +55,12 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("user", JSON.stringify(data.data.user));
         sessionStorage.setItem("timeSession", new Date().toUTCString());
 
-        this.Swal.showSuccess("Inicio de sesión exitoso!!").then((result) => {
-          if (result.isConfirmed) {
-            this.router.navigateByUrl('/dashboard/home')
-          }
-        });
+        this.router.navigateByUrl('/dashboard/home')
+
       }, error: (error) => {
         this.Swal.showError(error.error.meta.message);
       }
     })
 
-  }
-
-
-  onForgotPassword() {
-    console.log('Olvidé mi contraseña');
   }
 }

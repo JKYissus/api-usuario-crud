@@ -1,4 +1,4 @@
-<div class="container" style="margin: 20px;">
+<div class="" style="margin: 20px;">
     <h2>Listado de Usuarios</h2>
     <form [formGroup]="searchForm" (submit)="searchFromSubmit()">
         <div class="row">
@@ -48,7 +48,7 @@
             [ngClass]="{ 'active': currentPage + 1 === page }">
             <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
         </li>
-        <li class="page-item" [ngClass]="{ 'disabled': currentPage === totalPages - 1 }">
+        <li class="page-item" [ngClass]="{ 'disabled': currentPage === totalPages + 1 }">
             <a class="page-link" (click)="nextPage()" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
